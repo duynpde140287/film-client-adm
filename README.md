@@ -2,11 +2,20 @@
 
 Web admin riêng, dùng chung backend FilmX nhưng tách khỏi tool frontend. Frontend này có Git repository riêng, độc lập với `client-app` và `server`.
 
-## Chạy local
+## Công nghệ và chạy local
+
+Web admin dùng React 19, Vite và Lucide; nó có bố cục sidebar/header/workspace giống tool frontend, nhưng là website riêng.
+
+Frontend chỉ gọi API của backend FilmX để gửi hoặc nhận dữ liệu. FE không kết nối
+database và không tự xử lý quyền, license hay nghiệp vụ; backend xác thực vai trò,
+thực hiện quy tắc nghiệp vụ và đọc/ghi database. Tool frontend và web admin tiếp
+tục dùng chung backend.
 
 1. Khởi động backend FilmX.
-2. Trong thư mục này chạy `npm start`.
+2. Trong thư mục này chạy `npm install`, sau đó `npm start`.
 3. Mở `http://127.0.0.1:4174`, nhập API URL (mặc định `http://127.0.0.1:3000/api`) và đăng nhập bằng tài khoản có role `admin`.
+
+Build production bằng `npm run build`; Vite tạo nội dung trong `dist/`.
 
 Tạo/cập nhật admin đã được yêu cầu trong PowerShell bằng cách nhập password ẩn, không ghi password vào command hoặc file:
 
