@@ -11,6 +11,28 @@ database và không tự xử lý quyền, license hay nghiệp vụ; backend x�
 thực hiện quy tắc nghiệp vụ và đọc/ghi database. Tool frontend và web admin tiếp
 tục dùng chung backend.
 
+## Cấu trúc mã nguồn
+
+```text
+src/
+  components/   Thành phần giao diện dùng lại: badge, modal, bảng, trạng thái
+  constants/    Điều hướng, tiêu đề trang và cấu hình mặc định
+  contexts/     Phiên ADMIN, transport API và thông báo
+  hooks/        Tải dữ liệu theo trang và thao tác quản trị
+  layouts/      Sidebar, header và khung trang admin
+  pages/        Tổng quan, USER, file, template, tác vụ, nhật ký, đăng nhập
+  services/     API transport, auth endpoints và admin endpoints
+  utils/        Định dạng ngày, số và payload của form
+  App.jsx       Nối context, điều hướng và các trang
+  main.jsx      React entry point
+```
+
+Các thao tác dữ liệu đi theo luồng `Page → Hook → Service → API BE`; response
+được đưa ngược lại vào page state. Chỉ `services/api.service.js` gọi `fetch`.
+Phiên admin nằm trong `sessionStorage`, API URL và device ID nằm trong
+`localStorage`; mật khẩu chỉ được gửi trong request đăng nhập/tạo USER và không
+được lưu ở trình duyệt.
+
 1. Khởi động backend FilmX.
 2. Trong thư mục này chạy `npm install`, sau đó `npm start`.
 3. Mở `http://127.0.0.1:4174`, nhập API URL (mặc định `http://127.0.0.1:3000/api`) và đăng nhập bằng tài khoản có role `admin`.
